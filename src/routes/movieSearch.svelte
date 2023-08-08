@@ -4,11 +4,10 @@
     import { createEventDispatcher } from 'svelte';
     import { Search } from 'flowbite-svelte'
     import { Button } from 'flowbite-svelte'
-    import { Label, Input } from 'flowbite-svelte'
-    import { Card, Toggle } from "flowbite-svelte";
-    import JournalEntries from './journalEntries.svelte';
+    //import JournalEntries from './journalEntries.svelte';
 
     import MovieCard from './movieCard.svelte';
+	import NewEntry from './newEntry.svelte';
        
      const dispatch = createEventDispatcher();
      let searchTerm = '';
@@ -67,12 +66,21 @@
     <div class="group h-96 w-64 [perspective:1000px] flex-initial">
       <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-1000 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         <div class="absolute inset-0">
-          <img class="h-full w-full rounded-xl shadow-xl shadow-black/40 flex-auto" src="{'https://image.tmdb.org/t/p/w400' + movie.poster_path}" alt="{movie.title}" />
+            {#if movie.poster_path === null}
+          <img class="h-full w-full rounded-xl shadow-xl shadow-black/40 flex-auto" src="./src/lib/images/no_image_available.svg" alt="{movie.title}" />
+            {:else}
+            <img class="h-full w-full rounded-xl shadow-xl shadow-black/40 flex-auto" src="{'https://image.tmdb.org/t/p/w400' + movie.poster_path}" alt="{movie.title}" />
+            {/if}
         </div>
         <div class="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-12 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
           <div class="flex min-h-full flex-col items-center justify-center">
-            <h1 class="text-lg font-bold">{movie.title}</h1>
-            <Button class="mt-6">More Info</Button>
+            <h2 class="text-lg font-bold">{movie.title}</h2>
+            {#if movie.release_date === ""}
+            <p class="text-xs">No Available Release Date</p>
+            {:else}
+                <p>({movie.release_date.split("-")[0]})</p>
+            {/if}
+                <Button class="mt-6">More Info</Button>
           </div>
         </div>
       </div>

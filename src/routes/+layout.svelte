@@ -3,6 +3,8 @@
 	import '../app.postcss';
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input } from 'flowbite-svelte'
 	import { Footer, FooterCopyright, FooterLinkGroup, FooterLink } from 'flowbite-svelte'
+	//import JournalEntries from './journalEntries.svelte';
+	//import NewEntry from './newEntry.svelte';
 
 </script>
 
@@ -28,12 +30,17 @@
 		<Input id="search-navbar" class="pl-10" placeholder="Search..." />
 	  </div>
 
+	  <!-- <div class="pl-6">
+	  <NewEntry />
+		</div> -->
+
 	  <NavHamburger on:click={toggle} />
 	</div>
 	<NavUl {hidden}>
 	  <NavLi href="/" active={true}>Home</NavLi>
 	  <NavLi href="/about">About</NavLi>
 	  <NavLi href="/services">Services</NavLi>
+	  <NavLi href="/entries">Entries</NavLi>
 	</NavUl>
   </Navbar>
 
@@ -49,3 +56,9 @@
 	  <FooterLink href="/">Contact</FooterLink>
 	</FooterLinkGroup>
   </Footer>
+
+  <style>
+	:global(body) {
+		padding: 0px 20px;
+	}
+  </style>
